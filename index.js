@@ -24,7 +24,7 @@ app.use("/order", OrderRouter);
 
 const PORT= process.env.PORT || 5000
 mongoose.connect(
-    "mongodb://0.0.0.0:27017",     // important   when server not start then  replace  localhost  to 0.0.0.0
+    "mongodb://localhost:27017",     // important   when server not start then  replace  localhost  to 0.0.0.0
     {
         dbName: "ishop"
     }
