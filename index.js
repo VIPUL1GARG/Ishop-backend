@@ -36,7 +36,8 @@ mongoose.connect(
         )
     }
 ).catch(
-    () => {
+    (err) => {
+        console.log(err)
         console.log("Unable to start server")
     }
 )
