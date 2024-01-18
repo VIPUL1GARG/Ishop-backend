@@ -22,13 +22,16 @@ app.use("/user", UserRouter);
 app.use("/admin", AdminRouter);
 app.use("/cart", CartRouter);
 app.use("/order", OrderRouter);
-mongoose.connect(
+// mongoose.connect(
     // "mongodb://localhost:27017",        // important   when server not start then  replace  localhost  to 0.0.0.0
-   process.env.DATABASE_URI,
-    {
-        dbName: "ishop"
-    }
-).then(
+//    process.env.DATABASE_URI,
+    // {
+    //     dbName: "ishop"
+    // }
+    mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+
+// )
+.then(
     () => {
         app.listen(
             5000,
