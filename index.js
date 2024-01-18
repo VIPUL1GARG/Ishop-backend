@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config()
 const CategoryRouter = require('./Routers/CategoriesRouter');
 const mongoose = require('mongoose');
 const ColorRouter = require('./Routers/ColorRouter');
@@ -21,17 +22,16 @@ app.use("/user", UserRouter);
 app.use("/admin", AdminRouter);
 app.use("/cart", CartRouter);
 app.use("/order", OrderRouter);
-
-const PORT= process.env.PORT || 5000
 mongoose.connect(
-    "mongodb://localhost:27017",     // important   when server not start then  replace  localhost  to 0.0.0.0
+    // "mongodb://localhost:27017",        // important   when server not start then  replace  localhost  to 0.0.0.0
+   process.env.DATABASE_URI,
     {
         dbName: "ishop"
     }
 ).then(
     () => {
         app.listen(
-            PORT,
+            5000,
             () => console.log("Server started")
         )
     }
