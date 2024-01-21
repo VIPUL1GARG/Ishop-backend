@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+require('dotenv').config()
 const CategoryRouter = require('./Routers/CategoriesRouter');
 const mongoose = require('mongoose');
 const ColorRouter = require('./Routers/ColorRouter');
@@ -13,7 +13,7 @@ const OrderRouter = require('./Routers/OrderRouter');
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(express.static("public"));
+app.use(express.static("public"));   // important for show in webpage 
 
 app.use("/category", CategoryRouter);
 app.use("/color", ColorRouter);
@@ -22,29 +22,25 @@ app.use("/user", UserRouter);
 app.use("/admin", AdminRouter);
 app.use("/cart", CartRouter);
 app.use("/order", OrderRouter);
-mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(
+    // "mongodb://0.0.0.0:27017",        // important   when server not start then  replace  localhost  to 0.0.0.0
+   process.env.DATABASE_URI,
+    {
+        dbName: "ishop"
+    }
+    // mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
-const db = mongoose.connection;
-
-db.on('error', (err) => {
-    console.error('MongoDB connection error:', err);
-});
-
-db.once('open', () => {
-    console.log('Connected to MongoDB');
-    app.listen(5000, () => {
-        console.log("Server started");
-    });
-});
-
-db.on('disconnected', () => {
-    console.log('MongoDB disconnected');
-});
-
-// Gracefully close the MongoDB connection when the Node process is terminated
-process.on('SIGINT', () => {
-    mongoose.connection.close(() => {
-        console.log('MongoDB connection closed through app termination');
-        process.exit(0);
-    });
-});
+)
+.then(
+    () => {
+        app.listen(
+            5000,
+            () => console.log("Server started")
+        )
+    }
+).catch(
+    (err) => {
+        console.log(err)
+        console.log("Unable to start server")
+    }
+)
