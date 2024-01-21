@@ -31,7 +31,7 @@ class ProductController {
                             msg: "Data found",
                             status: 1,
                             product,
-                            baseUrl: "http://localhost:5000/uploads/product/"
+                            baseUrl: "https://ishop-api-dc8a.onrender.com/uploads/product/"
                         }
                     )
                 }

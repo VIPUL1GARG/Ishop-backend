@@ -28,7 +28,7 @@ class CategoryController {
                             msg: "Data found",
                             status: 1,
                             category,
-                            baseUrl: "http://localhost:5000/uploads/category/"
+                            baseUrl: "https://ishop-api-dc8a.onrender.com/uploads/category/"
                         }
                     )
                 }
